@@ -1,0 +1,27 @@
+{
+    "leftNavs": [{
+        "type": "fixed",
+        "name": "Apps",
+        "leftIcon": "TbBrandAppstore"
+    },{
+        "type": "fixed",
+        "name": "Library",
+        "leftIcon": "TbBook2"
+    },{
+        "type": "fixed",
+        "name": "Chats",
+        "leftIcon": "TbBrandHipchat"
+    },{
+        "type": "scorllable",
+        "label": "chat history",
+        "name": "Quis ipsum suspendisse"
+    }, {
+        "type": "scorllable",
+        "label": "chat history",
+        "name": "Quis ipsum suspendisse"
+    },{
+        "type": "scorllable",
+        "label": "chat history",
+        "name": "Quis ipsum suspendisse"
+    }]
+}

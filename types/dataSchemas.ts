@@ -13,3 +13,5 @@ interface App {
     logo?: Asset,
     labels?: string[]
 }
+
+export type ValueSelector = string[]

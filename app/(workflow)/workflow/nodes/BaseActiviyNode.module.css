@@ -1,0 +1,275 @@
+
+.baseActivityNode {
+    @apply text-slate-500 rounded
+}
+.baseActivityWrapper{
+    @apply flex shadow-sm rounded flex-col bg-white w-72 border border-solid hover:shadow-md;
+}
+
+.baseActivityWrapperConnectting {
+    @apply border-sky-700 shadow-xl border-2
+}
+.baseActivity {
+    @apply m-0.5 rounded p-2;
+}
+
+/* Theme green */
+.theme_bg_green {
+    @apply bg-green-200
+}
+.theme_title_green {
+    @apply text-green-700
+}
+
+.theme_text_hover_bg_green {
+    @apply hover:bg-green-400
+}
+.theme_border_green {
+    @apply border-green-400
+}
+
+/* Theme zinc */
+.theme_bg_zinc {
+    @apply bg-zinc-200
+}
+.theme_title_zinc {
+    @apply text-zinc-700
+}
+
+.theme_text_hover_bg_zinc {
+    @apply hover:bg-zinc-400
+}
+.theme_border_zinc {
+    @apply border-zinc-400
+}
+
+/* Theme orange */
+.theme_bg_orange {
+    @apply bg-orange-200
+}
+.theme_title_orange {
+    @apply text-orange-700
+}
+.theme_text_hover_bg_orange {
+    @apply hover:bg-orange-400
+}
+.theme_border_orange {
+    @apply border-orange-400
+}
+
+/* Theme amber */
+.theme_bg_amber {
+    @apply bg-amber-200
+}
+.theme_title_amber {
+    @apply text-amber-700
+}
+.theme_text_hover_bg_amber {
+    @apply hover:bg-amber-400
+}
+.theme_border_amber {
+    @apply border-amber-400
+}
+
+/* Theme lime */
+.theme_bg_lime {
+    @apply bg-lime-200
+}
+.theme_title_lime {
+    @apply text-lime-700
+}
+.theme_text_hover_bg_lime {
+    @apply hover:bg-lime-400
+}
+.theme_border_lime {
+    @apply border-lime-400
+}
+
+/* Theme lime */
+.theme_bg_emerald {
+    @apply bg-emerald-200
+}
+.theme_title_emerald {
+    @apply text-emerald-700
+}
+.theme_text_hover_bg_emerald {
+    @apply hover:bg-emerald-400
+}
+.theme_border_emerald {
+    @apply border-emerald-400
+}
+
+/* Theme teal  */
+.theme_bg_teal {
+    @apply bg-teal-200
+}
+.theme_title_teal  {
+    @apply text-teal-700
+}
+.theme_text_hover_bg_teal {
+    @apply hover:bg-teal-400
+}
+.theme_border_teal {
+    @apply border-teal-400
+}
+
+/* Theme cyan */
+.theme_bg_cyan {
+    @apply bg-cyan-200
+}
+.theme_title_cyan {
+    @apply text-cyan-700
+}
+.theme_text_hover_bg_cyan {
+    @apply hover:bg-cyan-400
+}
+.theme_border_cyan {
+    @apply border-cyan-400
+}
+
+/* Theme sky */
+.theme_bg_sky {
+    @apply bg-sky-200
+}
+.theme_title_sky {
+    @apply text-sky-700
+}
+.theme_text_hover_bg_sky {
+    @apply hover:bg-sky-400
+}
+.theme_border_sky {
+    @apply border-sky-400
+}
+
+/* Theme indigo */
+.theme_bg_indigo {
+    @apply bg-indigo-200
+}
+.theme_title_indigo {
+    @apply text-indigo-700
+}
+.theme_text_hover_bg_indigo {
+    @apply hover:bg-indigo-400
+}
+.theme_border_indigo {
+    @apply border-indigo-400
+}
+
+
+
+/* Theme violet */
+.theme_bg_purple {
+    @apply bg-purple-200
+}
+.theme_title_purple {
+    @apply text-purple-700
+}
+.theme_text_hover_bg_purple {
+    @apply hover:bg-purple-400
+}
+.theme_border_purple {
+    @apply border-purple-400
+}
+
+/* Theme fuchsia */
+.theme_bg_fuchsia {
+    @apply bg-fuchsia-200
+}
+.theme_title_fuchsia {
+    @apply text-fuchsia-700
+}
+.theme_text_hover_bg_fuchsia {
+    @apply hover:bg-fuchsia-400
+}
+.theme_border_fuchsia {
+    @apply border-fuchsia-400
+}
+
+/* Theme pink */
+.theme_bg_pink {
+    @apply bg-pink-200
+}
+.theme_title_pink {
+    @apply text-pink-700
+}
+.theme_text_hover_bg_pink {
+    @apply hover:bg-pink-400
+}
+.theme_border_pink {
+    @apply border-pink-400
+}
+
+/* Theme rose */
+.theme_bg_rose {
+    @apply bg-rose-200
+}
+.theme_title_rose {
+    @apply text-rose-700
+}
+.theme_text_hover_bg_rose {
+    @apply hover:bg-rose-400
+}
+.theme_border_rose {
+    @apply border-rose-400
+}
+
+/* Theme slate */
+.theme_bg_slate {   
+    @apply bg-slate-200
+}
+.theme_title_slate {
+    @apply text-slate-700
+}
+.theme_text_hover_bg_slate {
+    @apply hover:bg-slate-400
+}
+.theme_border_slate {
+    @apply border-slate-400
+}
+
+
+
+
+
+
+
+
+
+
+
+.text-area-native {
+    @apply w-full border-0 text-slate-500 hover:bg-slate-300;
+}
+.textarea-wrap {
+    
+    
+}  
+
+.nodeActionBorder {
+    @apply border-current border-b border-slate-200;
+}
+.themes {
+    
+}
+
+.connecting_base_node_target_handle {
+    @apply w-full h-full absolute border-none rounded z-10 opacity-0;
+}
+
+.static_base_node_target_handle {
+    @apply transform-none left-0 absolute top-0 w-0 h-0 z-10 opacity-0;
+}
+
+div.testtarget {
+    width: 100%;
+    height: 100%;
+    background: blue;
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-radius: 0;
+    transform: none;
+    border: none;
+    opacity: 0;
+    visibility: initial;
+  }

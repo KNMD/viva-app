@@ -1,0 +1,8 @@
+
+.toolbarNavBox {
+    @apply p-2 flex bg-white shadow-md rounded flex-col;
+}
+
+.iconWrap {
+    @apply py-2 cursor-pointer transition ease-in-out hover:shadow-md rounded
+}

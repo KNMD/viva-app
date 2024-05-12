@@ -1,5 +1,6 @@
 import type { AnnotationReplyConfig, ChatPromptConfig, CompletionPromptConfig, DatasetConfigs, PromptMode } from '@/types/debug'
 import type { LanguagesSupported } from '@/i18n/language'
+import { Node } from 'reactflow';
 
 export enum ProviderType {
   openai = 'openai',
@@ -441,3 +442,47 @@ export type AppVoicesListResponse = [{
   name: string
   value: string
 }]
+
+export type Action = {
+  actionType: string,
+  preIcon: string,
+  title: string,
+  subTitle?: string,
+  suffixIcon?: string,
+  enableOutput: boolean
+}
+
+export type ActionGroup = {
+  id: string,
+  actionGroupType: string,
+  enableInput: boolean,
+  actions: Action[]
+}
+
+export type NodeTheme = {
+  colorName?: "slate" | "purple" | "green" | "violet"
+}
+
+export type BaseNodeData = {
+  themes?: NodeTheme
+}
+
+export type BaseActivityData = {
+  title: string
+  enableDebug: boolean
+  groups: ActionGroup[],
+  themes?: NodeTheme
+};
+
+export type BaseActiviyNode = Node<BaseActivityData>;
+
+export type ActivityGroupData = {
+  themes?: NodeTheme
+  enableDebug: boolean
+  title: string
+}
+
+export type ActivityGroupNode = Node<ActivityGroupData>;
+
+export type StartNode = Node<BaseNodeData>;
+

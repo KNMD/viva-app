@@ -3,7 +3,9 @@ import * as TbIcons from 'react-icons/tb';
 import * as FaIcons from 'react-icons/fa';
 import * as RxIcons from 'react-icons/rx';
 import * as MdIcons from "react-icons/md";
+import * as PiIcons from "react-icons/pi";
 import Image from "next/image";
+import { ReactSVG } from 'react-svg'
 
 interface IconProps {
     iconName: string; // keyof typeof Icons;
@@ -22,13 +24,15 @@ const Icon: React.FC<IconProps> = ({ iconName, ...props }) => {
         IconComponent = RxIcons[iconName]
     }else if(iconName.toLocaleLowerCase().startsWith("md")) {
         IconComponent = MdIcons[iconName]
-    }else if(iconName.toLocaleLowerCase().startsWith("image")) {
-        IconComponent = "Image"
+    }else if(iconName.toLocaleLowerCase().startsWith("pi")) {
+        IconComponent = PiIcons[iconName]
     }
-    console.log("iconcompoinet: ", IconComponent)
-    if (IconComponent === 'Image') {
+    
+    if (iconName.toLocaleLowerCase().startsWith("image")) {
         return <Image {...props} />;
-    } else {
+    } else if(iconName.toLocaleLowerCase().startsWith("svg")) {
+        return <ReactSVG {...props} />
+    } else{
         return <IconComponent {...props} />;
     }
 };

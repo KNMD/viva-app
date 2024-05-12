@@ -44,7 +44,7 @@ const HomePage = memo((props) => {
                     data={appDatas}
                     loading={false} 
                     render={item => (
-                        <div className='flex h-[120px] relative' onClick={() => router.push("/apps/_create")}>
+                        <div className='flex h-[100px] relative' onClick={() => router.push("/apps/_create")}>
                             <div className=''>
                                 <Avatar className='w-[120px] h-[120px] rounded-none'>
                                     <AvatarImage src="/images/apps/app_backgroud_img.png" />

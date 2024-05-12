@@ -1,27 +1,77 @@
 {
     "leftNavs": [{
         "type": "fixed",
-        "name": "Apps",
-        "leftIcon": "TbBrandAppstore"
+        "name": "home",
+        "leftIcon": "TbHome2",
+        "link": "/home"
+    }, {
+        "type": "fixed",
+        "name": "apps",
+        "leftIcon": "TbBrandAppstore",
+        "link": "/apps"
     },{
         "type": "fixed",
-        "name": "Library",
-        "leftIcon": "TbBook2"
+        "name": "dataset",
+        "leftIcon": "TbBook2",
+        "link": "/datasets"
     },{
         "type": "fixed",
-        "name": "Chats",
-        "leftIcon": "TbBrandHipchat"
+        "name": "model",
+        "leftIcon": "TbBoxModel2",
+        "link": "/model"
     },{
-        "type": "scorllable",
-        "label": "chat history",
-        "name": "Quis ipsum suspendisse"
+        "type": "fixed",
+        "name": "member",
+        "leftIcon": "TbUsers",
+        "link": "/user"
+    },{
+        "type": "fixed",
+        "name": "dashbord",
+        "leftIcon": "RxDashboard",
+        "link": "/dashbord"
+    },{
+        "type": "fixed",
+        "name": "apiExtension",
+        "leftIcon": "TbApiApp",
+        "link": "/interfaces"
     }, {
         "type": "scorllable",
-        "label": "chat history",
-        "name": "Quis ipsum suspendisse"
+        "label": "plugins",
+        "name": "plugins.coach",
+        "leftIcon": "FaGraduationCap",
+        "link": "/coach"
+    }, {
+        "type": "scorllable",
+        "label": "plugins",
+        "name": "plugins.chat2charts",
+        "leftIcon": "RxPieChart",
+        "link": "/chart2charts"
     },{
         "type": "scorllable",
-        "label": "chat history",
-        "name": "Quis ipsum suspendisse"
+        "label": "plugins",
+        "name": "plugins.insight",
+        "leftIcon": "MdInsights",
+        "link": "/insight"
+    },{
+        "type": "bottom",
+        "name": "bottom.upgrade",
+        "leftIcon": "RxSketchLogo",
+        "link": "/insight",
+        "iconProps": {
+            "className": " text-red-500",
+            "src": "/images/icon/upgrade.png",
+            "width": 20,
+            "height": 20
+        }
+    },{
+        "type": "bottom",
+        "name": "bottom.document",
+        "leftIcon": "images",
+        "link": "/insight",
+        "iconProps": {
+            "src": "/images/icon/book.png",
+            "width": 20,
+            "height": 20
+        }
     }]
 }

@@ -1,34 +1,29 @@
 "use client"
-import Folder from '@/components/icons/folder'
-import VivaGrid from '@/components/modules/viva-grid'
-import VivaInput from '@/components/modules/viva-input'
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
-import { Button } from '@/components/ui/button'
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible'
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { cn } from '@/lib/utils'
-import { Checkbox } from '@radix-ui/react-checkbox'
-import { CaretSortIcon, ChatBubbleIcon, DotsHorizontalIcon, DotsVerticalIcon, Share1Icon } from '@radix-ui/react-icons'
-import React, { memo } from 'react'
-import { useTranslation } from 'react-i18next'
-import { RxCaretRight, RxDotsVertical, RxEnvelopeClosed, RxFile, RxGear, RxLayers, RxLoop, RxPerson, RxTokens } from 'react-icons/rx'
-import {
-    ColumnDef,
-    ColumnFiltersState,
-    SortingState,
-    VisibilityState,
-    flexRender,
-    getCoreRowModel,
-    getFilteredRowModel,
-    getPaginationRowModel,
-    getSortedRowModel,
-    useReactTable,
-} from "@tanstack/react-table"
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
-import { Pagination, PaginationContent, PaginationEllipsis, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from '@/components/ui/pagination'
-import App from 'next/app'
 
+import React, { memo } from 'react'
+import { useRouter } from 'next/navigation';
+import { useTranslation } from 'react-i18next'
+import Link from 'next/link';
+import { cn } from '@/lib/utils';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { RxSketchLogo, RxTokens } from 'react-icons/rx';
+import { CalendarIcon, CaretSortIcon, DotsHorizontalIcon, MagnifyingGlassIcon } from '@radix-ui/react-icons';
+import ReactEcharts from "echarts-for-react";
+import VivaChart from '@/components/charts';
+import ModelSpendStackAreaChart from './chats/model-spend-stack-area-chat';
+import ModelTopNPieChart from './chats/model-top-n-pie-chart';
+import VivaInput from '@/components/modules/viva-input';
+import { Pagination, PaginationContent, PaginationItem, PaginationPrevious, PaginationLink, PaginationEllipsis, PaginationNext } from '@/components/ui/pagination';
+import { Table, TableHeader, TableRow, TableHead, TableBody, TableCell } from '@/components/ui/table';
+import { ColumnDef, ColumnFiltersState, SortingState, flexRender, getCoreRowModel, getFilteredRowModel, getPaginationRowModel, getSortedRowModel, useReactTable } from '@tanstack/react-table';
+import { table } from 'console';
+import { Button } from '@/components/ui/button';
+import { Checkbox } from '@radix-ui/react-checkbox';
+import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuLabel, DropdownMenuItem, DropdownMenuSeparator } from '@radix-ui/react-dropdown-menu';
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
+import { Calendar } from '@/components/ui/calendar';
+import { setDate } from 'date-fns';
+import { addDays, format } from "date-fns"
 
 
 const data: Payment[] = [
@@ -71,7 +66,7 @@ export type Payment = {
     email: string
 }
 
-const columns: ColumnDef<Payment>[] = [
+const columnsDash: ColumnDef<Payment>[] = [
     {
         id: "select",
         header: ({ table }) => (
@@ -161,21 +156,17 @@ const columns: ColumnDef<Payment>[] = [
         },
     },
 ]
-
-
-const DatasetPage = memo(() => {
+const DashbordPage = memo((props) => {
     const [sorting, setSorting] = React.useState<SortingState>([])
+    const { t } = useTranslation()
+    const router = useRouter()
     const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
         []
     )
-    const [columnVisibility, setColumnVisibility] =
-        React.useState<VisibilityState>({})
-
-    const [rowSelection, setRowSelection] = React.useState({})
 
     const table = useReactTable({
         data,
-        columns,
+        columns: columnsDash,
         onSortingChange: setSorting,
         getCoreRowModel: getCoreRowModel(),
         getPaginationRowModel: getPaginationRowModel(),
@@ -187,41 +178,142 @@ const DatasetPage = memo(() => {
             columnFilters,
         },
     })
-    const { t } = useTranslation()
+    const [date, setDate] = React.useState<DateRange | undefined>({
+        from: new Date(2022, 0, 20),
+        to: addDays(new Date(2022, 0, 20), 20),
+      })
     return (
-        <div className='flex h-full overflow-hidden w-full'>
-            <div className=" p-5 split overflow-y-auto flex flex-col w-56 justify-between">
-                <div className=' flex flex-col space-y-4'>
-                    <h3 className=''>知识库</h3>
-                    <div className='w-full flex items-center space-x-2'>
-                        <div className='w-[35px] h-[35px] bg-secondary rounded-full relative'>
-                            <div className=' absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2'>
-                                <RxLayers className={cn('text-primary')} />
-                            </div>
-                        </div>
-                        <h3 className=' text-base'>asdfasdfasf</h3>
-                    </div>
-                    <p className=' text-xs text-slate-500'>asdfasdfasdf</p>
-                    <div className=' flex flex-col space-y-2'>
-                        <div className=' flex items-center space-x-2 hover:text-primary hover:bg-primary-foreground hover:shadow p-2 rounded-md cursor-pointer w-full'>
-                            <RxFile />
-                            <span>文档</span>
-                        </div>
-                        <div className=' flex items-center space-x-2 hover:text-primary hover:bg-primary-foreground hover:shadow p-2 rounded-md cursor-pointer w-full'>
-                            <RxLoop />
-                            <span>搜索测试</span>
-                        </div>
-                        <div className=' flex items-center space-x-2 hover:text-primary hover:bg-primary-foreground hover:shadow p-2 rounded-md cursor-pointer w-full'>
-                            <RxGear />
-                            <span>配置</span>
-                        </div>
-                    </div>
-
+        
+        <div className='flex w-full flex-col p-5'>
+            <div className='content flex flex-col w-full'>
+                <div className=' flex justify-between my-2'>
+                    <div className={cn(' text-slate-500')}>{t('appOverview.overview.title')}</div>
                 </div>
+                <div className="h-px border border-gray-100 my-2 mb-5"></div>
+            </div>
+            <div className='flex flex-wrap gap-3'>
+                <Card className='hover:shadow-md hover:bg-primary-50 transition duration-500 ease-in-out transform hover:-translate-y-1 cursor-pointer'>
+                    <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                        <CardTitle className="text-sm font-medium">
+                            {t('extends.dash.sumToken')}
+                        </CardTitle>
+                        <RxTokens />
+                    </CardHeader>
+                    <CardContent>
+                        <div className="text-2xl font-bold">45,231</div>
+                        <p className="text-xs text-muted-foreground">
+                            INPUT: 323,433
+                        </p>
+                        <p className="text-xs text-muted-foreground">
+                            OUTPUT: 293,233
+                        </p>
+                    </CardContent>
+                </Card>
+                <Card className='hover:shadow-md hover:bg-primary-50 transition duration-500 ease-in-out transform hover:-translate-y-1 cursor-pointer'>
+                    <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                        <CardTitle className="text-sm font-medium">
+                            {t('extends.dash.sumPrice')}
+                        </CardTitle>
+                        <RxSketchLogo />
+                    </CardHeader>
+                    <CardContent>
+                        <div className="text-2xl font-bold">45,231.89</div>
+                        <p className="text-xs text-muted-foreground">
+                            +20.1% from last month
+                        </p>
+                    </CardContent>
+                </Card>
+                <Card className='hover:shadow-md hover:bg-primary-50 transition duration-500 ease-in-out transform hover:-translate-y-1 cursor-pointer'>
+                    <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                        <CardTitle className="text-sm font-medium">
+                            {t('extends.dash.datasetSearchTimes')}
+                        </CardTitle>
+                        <MagnifyingGlassIcon className=" text-muted-foreground" />
+                    </CardHeader>
+                    <CardContent>
+                        <div className="text-2xl font-bold">23,345</div>
+                        <p className="text-xs text-muted-foreground">
+                            +20.1% from last month
+                        </p>
+                    </CardContent>
+                </Card>
+                <Card className='hover:shadow-md hover:bg-primary-50 transition duration-500 ease-in-out transform hover:-translate-y-1 cursor-pointer'>
+                    <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                        <CardTitle className="text-sm font-medium">
+                            Total Revenue
+                        </CardTitle>
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth="2"
+                            className="h-4 w-4 text-muted-foreground"
+                        >
+                            <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+                        </svg>
+                    </CardHeader>
+                    <CardContent>
+                        <div className="text-2xl font-bold">$45,231.89</div>
+                        <p className="text-xs text-muted-foreground">
+                            +20.1% from last month
+                        </p>
+                    </CardContent>
+                </Card>
+            </div>
+            <div className='flex flex-wrap gap-3 my-5'>
+                <Card className='w-[500px] h-[400px] overflow-hidden rounded shadow-lg'>
+                    <ModelSpendStackAreaChart />
+                </Card>
+
+                <Card className='w-[500px] h-[400px] overflow-hidden rounded shadow-lg'>
+                    <ModelTopNPieChart height={400} />
+                </Card>
             </div>
             <div className="flex-grow p-5 flex flex-col space-y-2  h-full">
-                <h3>{t('extends.document_list')}</h3>
-                <VivaInput className={cn('w-96')} />
+                <h3>{t('appLog.viewLog')}</h3>
+                <div className=' flex justify-between'>
+                    <VivaInput className={cn('w-96')} />
+                    <Popover>
+                        <PopoverTrigger asChild>
+                            <Button
+                                id="date"
+                                variant={"outline"}
+                                className={cn(
+                                    "w-[300px] justify-start text-left font-normal",
+                                    !date && "text-muted-foreground"
+                                )}
+                            >
+                                <CalendarIcon className="mr-2 h-4 w-4" />
+                                {date?.from ? (
+                                    date.to ? (
+                                        <>
+                                            {format(date.from, "LLL dd, y")} -{" "}
+                                            {format(date.to, "LLL dd, y")}
+                                        </>
+                                    ) : (
+                                        format(date.from, "LLL dd, y")
+                                    )
+                                ) : (
+                                    <span>Pick a date</span>
+                                )}
+                            </Button>
+                        </PopoverTrigger>
+                        <PopoverContent className="w-auto p-0" align="start">
+                            <Calendar
+                                initialFocus
+                                mode="range"
+                                defaultMonth={date?.from}
+                                selected={date}
+                                onSelect={setDate}
+                                numberOfMonths={2}
+                            />
+                        </PopoverContent>
+                    </Popover>
+                </div>
+
                 <div className="h-px bg-primary border w-full"></div>
                 <div className={cn('bg-white overflow-hidden shadow-sm rounded-md')}>
 
@@ -329,7 +421,10 @@ const DatasetPage = memo(() => {
             </div>
         </div>
 
+
+
     )
 })
 
-export default DatasetPage
+
+export default DashbordPage

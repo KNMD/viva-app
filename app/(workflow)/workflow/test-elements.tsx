@@ -1,8 +1,59 @@
-import { BaseActiviyNode } from '@/types/app';
+import { BaseActiviyNodeProps } from '@/types/app';
 import React from 'react';
 import { MarkerType, Position, Node } from 'reactflow';
 
 export const nodes: Node[] = [
+  {
+    id: '001',
+    type: 'if',
+    data: {
+      title: 'API Call',
+      enableDebug: false,
+      groups: [{
+        id: "1",
+        actionGroupType: "APICallGroup",
+        enableInput: true,
+        actions: [{
+          actionType: 'APICallConfig',
+          title: 'POST',
+          subTitle: 'https://www.baidu.com',
+          enableOutput: false,
+        },{
+          actionType: 'APICallResultSuccess',
+          preIcon: 'TbCheck',
+          title: 'Success',
+          enableOutput: false,
+        },{
+          actionType: 'APICallResultFail',
+          preIcon: 'TbX',
+          title: 'Fail',
+          enableOutput: false,
+        }]
+      }, {
+        actionGroupType: "LLMGroup",
+        enableInput: true,
+        id: "2",
+        actions: [{
+          actionType: 'PromptTemplate',
+          preIcon: 'TbBrandOpenai',
+          title: 'Prompts',
+          subTitle: '你是一名Java工程师...',
+          enableOutput: true,
+          suffixIcon: "TbEditCircle"
+        }, {
+          actionType: 'PromptMode',
+          preIcon: 'TbBoxModel2',
+          title: '百川2',
+          
+        }, {
+          actionType: 'APIKey',
+          preIcon: 'TbLockAccess',
+          title: '**********',
+        }]
+      }]
+    },
+    position: { x: 100, y: 700 },
+  },
   {
     id: '100',
     type: 'base',
@@ -54,7 +105,7 @@ export const nodes: Node[] = [
       }]
     },
     position: { x: 300, y: 700 },
-  } as BaseActiviyNode,
+  } ,
   
   {
     id: '000',

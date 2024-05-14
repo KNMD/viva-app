@@ -18,6 +18,12 @@ const appDatas: App[] = [{
 }, {
     id: '1',
     name: 'App name',
+},  {
+    id: '1',
+    name: 'App name',
+}, {
+    id: '1',
+    name: 'App name',
 }]
 
 const HomePage = memo((props) => {
@@ -44,9 +50,9 @@ const HomePage = memo((props) => {
                     data={appDatas}
                     loading={false} 
                     render={item => (
-                        <div className='flex h-[100px] relative' onClick={() => router.push("/apps/_create")}>
+                        <div className='flex h-[150px] relative min-w-[300px] max-w-[400px]' onClick={() => router.push("/apps/_create")}>
                             <div className=''>
-                                <Avatar className='w-[120px] h-[120px] rounded-none'>
+                                <Avatar className='w-[150px] h-[150px] rounded-none'>
                                     <AvatarImage src="/images/apps/app_backgroud_img.png" />
                                     <AvatarFallback className='rounded-none'>
                                         <img src="/images/apps/app_default_logo.png" />

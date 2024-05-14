@@ -34,6 +34,7 @@ import { nodes as initialNodes, edges as initialEdges } from '../test-elements';
 import TitleNavBar from "../tools/TitleNavBar";
 import ToolNavBar from "../tools/ToolNavBar";
 import BaseActiviyNode from "../nodes/BaseActiviyNode";
+import IfNode from "../nodes/IfNode";
 import FloatingEdge from "../edges/FloatingEdge";
 // @ts-ignore
 import FloatingConnectionLine from "./edges/FloatingConnectionLine"
@@ -44,13 +45,14 @@ import { Sheet, SheetClose, SheetContent, SheetDescription, SheetFooter, SheetHe
 import { Label } from '@radix-ui/react-dropdown-menu';
 import { Input } from 'postcss';
 import { Button } from '@/components/ui/button';
-import { BaseActiviyNode as BaseActiviyNodeType } from '@/types/app';
+import { BaseActiviyNodeProps } from '@/types/app';
 
 // @ts-ignore
 const nodeTypes = {
   start: StartNode,
   base: BaseActiviyNode,
-  activityGroup: ActivityGroupNode
+  activityGroup: ActivityGroupNode,
+  if: IfNode,
 } as NodeTypes;
 
 const minimapStyle = {
@@ -172,7 +174,7 @@ const worffowDetailPage = memo(() => {
 
   // 	setNodes(newNodes)
   // }, []);
-  const onSideBar = (node: Node) => {
+  const onSideBar = (chilren: React.ReactNode) => {
     console.log("onside bar node: ", node)
   }
   return (
@@ -200,27 +202,7 @@ const worffowDetailPage = memo(() => {
           </Panel>
           <Panel position="top-left" className="toolbar-nav-container">
             <ToolNavBar />
-            <Sheet>
-              <SheetTrigger asChild>
-                <Button variant="outline">Open</Button>
-              </SheetTrigger>
-              <SheetContent>
-                <SheetHeader>
-                  <SheetTitle>Edit profile</SheetTitle>
-                  <SheetDescription>
-                    Make changes to your profile here. Click save when you're done.
-                  </SheetDescription>
-                </SheetHeader>
-                <div className="grid gap-4 py-4">
-                  asdf
-                </div>
-                <SheetFooter>
-                  <SheetClose asChild>
-                    <Button type="submit">Save changes</Button>
-                  </SheetClose>
-                </SheetFooter>
-              </SheetContent>
-            </Sheet>
+            
           </Panel>
         </ReactFlow>
 

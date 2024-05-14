@@ -1,6 +1,7 @@
 import type { AnnotationReplyConfig, ChatPromptConfig, CompletionPromptConfig, DatasetConfigs, PromptMode } from '@/types/debug'
 import type { LanguagesSupported } from '@/i18n/language'
 import { Node, NodeProps } from 'reactflow';
+import React from 'react';
 
 export enum ProviderType {
   openai = 'openai',
@@ -475,7 +476,10 @@ export type BaseActivityData = {
   
 };
 
-export type BaseActiviyNode = NodeProps<BaseActivityData>;
+export type BaseActiviyNodeProps = NodeProps<BaseActivityData> & {
+  preIcon?: React.ReactNode
+  onNodeSidebar?: React.ReactNode
+};
 
 export type ActivityGroupData = {
   themes?: NodeTheme

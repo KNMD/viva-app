@@ -22,11 +22,12 @@ const VivaGrid: React.FC<VivaGridProp> = memo(({
         skeletonCount = 10
     }
     return (
-        <div className={`content-start grid grid-cols-1 pt-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 grow shrink-0 flex-wrap gap-2`} >
+        // <div className={`content-start grid grid-cols-1 pt-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 grow shrink-0 flex-wrap gap-2`} >
+        <div className={`content-start flex flex-wrap gap-2`} >
             {!loading && 
             data && data.map((item, index) => {
                 return (
-                    <Card key={index} className=' overflow-hidden rounded hover:shadow-md hover:bg-primary-50 transition duration-500 ease-in-out transform hover:-translate-y-1 cursor-pointer'>
+                    <Card key={index} className=' w-[300px]  overflow-hidden rounded hover:shadow-md hover:bg-primary-50 transition duration-500 ease-in-out transform hover:-translate-y-1 cursor-pointer'>
                         {render?.(item)}
                     </Card>
                 )

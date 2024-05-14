@@ -44,6 +44,7 @@ import { Sheet, SheetClose, SheetContent, SheetDescription, SheetFooter, SheetHe
 import { Label } from '@radix-ui/react-dropdown-menu';
 import { Input } from 'postcss';
 import { Button } from '@/components/ui/button';
+import { BaseActiviyNode as BaseActiviyNodeType } from '@/types/app';
 
 // @ts-ignore
 const nodeTypes = {
@@ -171,9 +172,12 @@ const worffowDetailPage = memo(() => {
 
   // 	setNodes(newNodes)
   // }, []);
+  const onSideBar = (node: Node) => {
+    console.log("onside bar node: ", node)
+  }
   return (
     <div style={{ height: '100vh', width: '100vw' }} className="reactflow-wrapper" ref={reactFlowWrapper}>
-      <GraphContext.Provider value={{ addNodes, setGraphNodes, setGraphEdges, autoLayout }}>
+      <GraphContext.Provider value={{ addNodes, setGraphNodes, setGraphEdges, autoLayout, onSideBar }}>
         <ReactFlow
           nodes={nodes}
           edges={edges}

@@ -7,6 +7,7 @@ type GraphContextType = {
   setGraphNodes: (nodes: Node[]) => void;
   setGraphEdges: (edges: Edge[]) => void;
   autoLayout: (nodes: Node[], edges: Edge[]) => void;
+  onSideBar: (node: Node) => void;
 };
 
 export const GraphContext = createContext<GraphContextType | undefined>(undefined);

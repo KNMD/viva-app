@@ -3,8 +3,9 @@ import React, { CSSProperties, memo, useCallback, useEffect, useState } from 're
 import { Handle, Node, NodeProps, OnConnect, Position, ReactFlowState, useStore } from 'reactflow';
 import Textarea from "./components/BaseActivities/Textarea";
 import styles from './BaseActiviyNode.module.css'
-import { ActivityTheme, BaseActiviyNode } from '@/types/app';
+import { NodeTheme, BaseActiviyNode } from '@/types/app';
 import Icon from '@/components/modules/icon';
+import { useGraphContext } from '../context';
 
 const connectionNodeIdSelector = (state:ReactFlowState) => state.connectionNodeId;
 
@@ -41,11 +42,14 @@ const BaseActiviyNode = memo((node: BaseActiviyNode) => {
     const abortConnectHandle = () => {
         setHighlightWrapperLabel("")
     }
-    const clickHandle = () => {
-        alert(1)
+    const nodeClickHandle = (node: BaseActiviyNode) => {
+        console.log("e, node", node)
+        const { autoLayout } = useGraphContext();
+        autoLayout([], [])
     }
+    
     return (
-        <div className={`${styles.baseActivityNode} + " relative " + ${node.className} ${isConnecting && highlightWrapperLabel === node.id && styles.baseActivityWrapperConnectting}`} style={node.style}>
+        <div className={`${styles.baseActivityNode} + " relative " + ${node.className} ${isConnecting && highlightWrapperLabel === node.id && styles.baseActivityWrapperConnectting}`} style={node.style} onClick={() => {nodeClickHandle(node)}}>
             <div className={`${styles.baseActivityWrapper} ${styles['theme_border_' + colorName]} `}>
                 
                 <div className={`${styles.baseActivity} ${styles['theme_bg_' + colorName]} `}>
@@ -75,7 +79,7 @@ const BaseActiviyNode = memo((node: BaseActiviyNode) => {
                         
                     {
                         node.data.groups.map((groups,index)=> (
-                            <div className={`group bg-slate-50 cursor-pointer rounded my-2 border-1 border-slate-300 border-solid relative ${isConnecting && highlightWrapperLabel === (node.id + '-' + groups.id) && styles.baseActivityWrapperConnectting}`} key={index} onClick={clickHandle}>
+                            <div className={`group bg-slate-50 cursor-pointer rounded my-2 border-1 border-slate-300 border-solid relative ${isConnecting && highlightWrapperLabel === (node.id + '-' + groups.id) && styles.baseActivityWrapperConnectting}`} key={index}>
                                 <Handle
                                     type="target"
                                     position={Position.Left}

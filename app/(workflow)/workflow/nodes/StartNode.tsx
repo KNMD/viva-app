@@ -50,9 +50,7 @@ const StartNode = memo((node: StartNode) => {
             </div>
 
             <div className='relative'>
-                <Handle type="source" position={Position.Right} className={styles.connecting_base_node_target_handle}>
-                    
-                </Handle>
+                <Handle type="source" position={Position.Right} className={styles.connecting_base_node_target_handle} />
                 <FaBullseye />
             </div>
         </div>

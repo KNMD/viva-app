@@ -8,6 +8,9 @@ import Icon from '@/components/modules/icon';
 import { useGraphContext } from '../context';
 import { Sheet, SheetTrigger, SheetContent, SheetHeader, SheetTitle, SheetDescription, SheetFooter, SheetClose } from '@/components/ui/sheet';
 import { Button } from '@/components/ui/button';
+import { FaBullseye } from 'react-icons/fa';
+import BaseSidebar from '../sidebar/BaseSidebar';
+import { useTranslation } from 'react-i18next';
 
 const connectionNodeIdSelector = (state: ReactFlowState) => state.connectionNodeId;
 
@@ -15,6 +18,7 @@ const connectionNodeIdSelector = (state: ReactFlowState) => state.connectionNode
 
 const BaseActiviyNode = ((node: BaseActiviyNodeProps) => {
     const connectionNodeId = useStore(connectionNodeIdSelector);
+    const {t} = useTranslation()
     const [open, setOpen] = useState(false)
     const isTarget = connectionNodeId && connectionNodeId !== node.id;
     const isConnecting = !!connectionNodeId
@@ -67,7 +71,7 @@ const BaseActiviyNode = ((node: BaseActiviyNodeProps) => {
                     <div className={styles.nodeTitle + " relative z-0"}>
                         <div className='flex rounded justify-between'>
                             <div className='text-field cursor-text'>
-                                {node.data.title}
+                                {node.data.title || t(`extends.wf.nodeType.${node.type}`)}
                             </div>
                             {
                                 node.data.enableDebug ?
@@ -126,8 +130,12 @@ const BaseActiviyNode = ((node: BaseActiviyNodeProps) => {
                                                         }
                                                         {
                                                             action.enableOutput ?
-                                                                <div className='handle w-5 mx-1 my-auto'>
-                                                                    <Icon iconName='TbCircleDot' size='18' />
+
+                                                                <div className='relative handle w-5 mx-1 my-auto'>
+                                                                    <Handle type="source" position={Position.Right} className={styles.connecting_base_node_target_handle} id={`${node.id}-${groups.id}-${action.id}`}>
+
+                                                                    </Handle>
+                                                                    <FaBullseye />
                                                                 </div>
                                                                 : <></>
                                                         }
@@ -144,25 +152,10 @@ const BaseActiviyNode = ((node: BaseActiviyNodeProps) => {
                 </div>
 
             </div>
-            {node.onNodeSidebar && <Sheet open={open} onOpenChange={setOpen}>
-
-                <SheetContent>
-                    <SheetHeader>
-                        <SheetTitle>Edit profile</SheetTitle>
-                        <SheetDescription>
-                            Make changes to your profile here. Click save when you're done.
-                        </SheetDescription>
-                    </SheetHeader>
-                    <div className="grid gap-4 py-4">
-                        {node.onNodeSidebar}
-                    </div>
-                    <SheetFooter>
-                        <SheetClose asChild>
-                            <Button type="submit">Save changes</Button>
-                        </SheetClose>
-                    </SheetFooter>
-                </SheetContent>
-            </Sheet>}
+            {node.onNodeSidebar && 
+            <BaseSidebar open={open} onOpenChange={setOpen} nodeProps={node}>
+                {node.onNodeSidebar}
+            </BaseSidebar>}
         </div>
     )
 })

@@ -2,6 +2,7 @@ import type { AnnotationReplyConfig, ChatPromptConfig, CompletionPromptConfig, D
 import type { LanguagesSupported } from '@/i18n/language'
 import { Node, NodeProps } from 'reactflow';
 import React from 'react';
+import { DialogProps } from '@radix-ui/react-dialog';
 
 export enum ProviderType {
   openai = 'openai',
@@ -445,12 +446,14 @@ export type AppVoicesListResponse = [{
 }]
 
 export type Action = {
+  id: string,
   actionType: string,
   preIcon: string,
   title: string,
   subTitle?: string,
   suffixIcon?: string,
   enableOutput: boolean
+  params?: Record<string, any>
 }
 
 export type ActionGroup = {
@@ -490,4 +493,9 @@ export type ActivityGroupData = {
 export type ActivityGroupNode = Node<ActivityGroupData>;
 
 export type StartNode = Node<BaseNodeData>;
+
+export interface BaseSidebarProps extends DialogProps {
+  nodeProps: BaseActiviyNodeProps 
+  footerSlot?: React.ReactNode  
+}
 

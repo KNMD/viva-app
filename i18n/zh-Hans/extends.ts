@@ -30,6 +30,15 @@ const translation = {
         sumToken: 'Token总消耗',
         sumPrice: '费用总消耗',
         datasetSearchTimes: '知识库检索次数'
+    },
+    wf: {
+        nodeType: {
+            if: '条件节点'
+        },
+        addCondition: '添加条件',
+        variable: '变量',
+        expression: '表达式'
+
     }
 }
 

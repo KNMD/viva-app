@@ -12,7 +12,7 @@ const BaseSidebar = memo((props: BaseSidebarProps) => {
     const { t } = useTranslation()
     return (
         <Sheet {...props}>
-            <SheetContent className="p-0">
+            <SheetContent className="p-0 rounded-l-xl">
                 <SheetHeader className="border-b-slate-100 border-b ">
                     <SheetTitle className="my-2 flex pl-5">{props.nodeProps.data.title || t(`extends.wf.nodeType.${props.nodeProps.type}`)}</SheetTitle>
                 </SheetHeader>

@@ -17,7 +17,7 @@ const translation = {
         dashbord: "数据分析",
         plugins: {
             label: "插件",
-            coach: "数字人教学",
+            coach: "数字人教练",
             chat2charts: "行业洞察图表",
             insight: "大模型质检",
         },

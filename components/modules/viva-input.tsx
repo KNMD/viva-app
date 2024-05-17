@@ -1,3 +1,4 @@
+"use client"
 import React, { memo } from 'react'
 import { Input, InputProps } from '../ui/input'
 import { MagnifyingGlassIcon } from '@radix-ui/react-icons'

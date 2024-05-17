@@ -12,3 +12,19 @@ export interface Navigation {
 export interface AppSchema {
     leftNavs: Navigation[]
 }
+
+export interface BuildYupConfig {
+    errorMessages: Record<string, any>
+}
+
+export interface FormFieldUI {
+    component: string,
+    displayName?: string,
+}
+
+export interface FormFieldSchema {
+    schema: Record<string, any>
+    config: BuildYupConfig,
+    ui: Record<string, FormFieldUI>
+}
+

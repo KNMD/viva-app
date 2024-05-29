@@ -29,7 +29,7 @@ const Icon: React.FC<IconProps> = ({ iconName, ...props }) => {
     }
     
     if (iconName.toLocaleLowerCase().startsWith("image")) {
-        return <Image {...props} />;
+        return <Image {...props} alt="viva" />;
     } else if(iconName.toLocaleLowerCase().startsWith("svg")) {
         return <ReactSVG {...props} />
     } else{

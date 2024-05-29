@@ -38,10 +38,10 @@ const LeftSidebar = memo(() => {
 
                         <div className="w-full flex-col flex">
                             {
-                                groupTypeAppData.fixed.map((item: Navigation) => {
+                                groupTypeAppData.fixed.map((item: Navigation, indx) => {
                                     return (
 
-                                        <div className="p-3 rounded-lg justify-between items-center inline-flex hover:bg-white hover:shadow">
+                                        <div key={indx} className="p-3 rounded-lg justify-between items-center inline-flex hover:bg-white hover:shadow">
                                             <Link className='w-full' href={item.link}>
                                                 <div className="grow shrink basis-0 justify-start items-center gap-2 flex">
                                                     {item.leftIcon && <Icon iconName={item.leftIcon} className=' text-base text-slate-500' />}
@@ -68,9 +68,9 @@ const LeftSidebar = memo(() => {
                         </div>
                         <div className="flex-col justify-start items-start gap-1 flex">
                             {
-                                groupTypeAppData.scorllable.map((item: Navigation) => {
+                                groupTypeAppData.scorllable.map((item: Navigation, indx) => {
                                     return (
-                                        <div className="pl-3 pr-2.5 py-2 rounded-lg justify-start items-center inline-flex">
+                                        <div key={indx} className="pl-3 pr-2.5 py-2 rounded-lg justify-start items-center inline-flex">
                                             <Link className='w-full' href={item.link}>
                                             <div className="grow shrink basis-0 h-[18px] justify-start items-center gap-2 flex">
                                                 {item.leftIcon && <Icon iconName={item.leftIcon} className=' text-base text-slate-500' />}
@@ -87,9 +87,9 @@ const LeftSidebar = memo(() => {
                 </div>
                 <div className=" absolute bottom-5 w-full pr-5 flex flex-col">
                     {
-                        groupTypeAppData.bottom.map((item: Navigation) => {
+                        groupTypeAppData.bottom.map((item: Navigation, indx) => {
                             return (
-                                <div className="pl-3 pr-2.5 py-2 rounded-lg justify-start items-center inline-flex">
+                                <div key={indx} className="pl-3 pr-2.5 py-2 rounded-lg justify-start items-center inline-flex">
                                     <Link className='w-full' href={item.link}>
                                     <div className="grow shrink basis-0 h-[18px] justify-start items-center gap-2 flex">
                                         {item.leftIcon && <Icon iconName={item.leftIcon} className=' text-base text-slate-500' {...item.iconProps} />}

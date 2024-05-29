@@ -2,8 +2,8 @@ import React, { ReactNode, memo } from 'react'
 import { Card } from '../ui/card'
 import { Skeleton } from '../ui/skeleton'
 
-interface VivaGridProp {
-    data: Record<string, any>[]
+interface VivaGridProp<T> {
+    data: T[]
     loading: boolean
     skeletonCount?: number
     height?: string

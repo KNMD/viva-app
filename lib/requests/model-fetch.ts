@@ -26,6 +26,10 @@ class ModelFetch extends BaseFetch {
     return this.get<ModelProviderEntity>(`/providers/${id}`)
   }
 
+  async addProvider(data: ModelProviderEntity) {
+    return this.post<ModelProviderEntity>(`/providers`, data)
+  }
+
 
 }
 

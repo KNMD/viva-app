@@ -12,6 +12,8 @@ import { buildYup } from 'schema-to-yup';
 
 interface DynamicFormProps {
     formSchema: FormFieldSchema
+    submitText?: string 
+    onSubmit: (formData: Record<string, any>) => void;
 }
 
 
@@ -23,21 +25,21 @@ const config = {
     },
   };
 const DynamicForm = memo((props:DynamicFormProps) => {
-    console.log("props.formSchema.config", props.formSchema.config)
     const validationSchema = buildYup(props.formSchema.schema, props.formSchema.config)
     const form = useForm({
         resolver: yupResolver(validationSchema)
     });
 
     const onSubmit = (data:any) => {
-        toast({
-            title: "You submitted the following values:",
-            description: (
-                <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-                    <code className="text-white">{JSON.stringify(data, null, 2)}</code>
-                </pre>
-            ),
-        })
+        // toast({
+        //     title: "You submitted the following values:",
+        //     description: (
+        //         <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
+        //             <code className="text-white">{JSON.stringify(data, null, 2)}</code>
+        //         </pre>
+        //     ),
+        // })
+        props.onSubmit(data)
     }
     return (
         <Form {...form}>
@@ -65,7 +67,7 @@ const DynamicForm = memo((props:DynamicFormProps) => {
                 }
 
                 <div className='flex space-x-2'>
-                    <Button type="submit">{t('datasetCreation.stepTwo.preview')}</Button>
+                    <Button type="submit">{ props.submitText || t("datasetCreation.stepTwo.preview")}</Button>
                     <Button type="reset" variant="secondary">{t('datasetCreation.stepTwo.reset')}</Button>
                 </div>
 

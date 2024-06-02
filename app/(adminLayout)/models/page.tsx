@@ -73,7 +73,7 @@ const supportedModelProvider = [{
         },
         "config": {
             "errMessages": {
-                "api_key": { required:"extends.errorMessages.common.requried" },
+                "api_key": { required: "extends.errorMessages.common.requried" },
             }
         },
         "ui": {
@@ -105,16 +105,16 @@ const supportedModelProvider = [{
 const ModelPage = memo((props) => {
     const { t } = useTranslation()
     const [settings, setSettings] = useState<FormFieldSchema>()
-    const [currentModel, setCurrentModel] = useState<Record<string, any>>()
+    const [currentModelProvider, setCurrentModelProvider] = useState<Record<string, any>>()
     const [settingsOpen, setSettingsOpen] = useState(false)
     const [modelProvider, setModelProvider] = useState<Record<string, any>>()
     const [loading, setLoading] = useState<boolean>(false)
     const [modelList, setModelList] = useState<ModelEntity[]>([])
     const [modelListLoading, setModelListLoading] = useState<boolean>(false)
-    const settingsHandle = (model: Record<string, any>) => {
+    const settingsHandle = (modelProvider: Record<string, any>) => {
         setSettingsOpen(true)
-        setSettings(model.configSchema)
-        setCurrentModel(model)
+        setSettings(modelProvider.configSchema)
+        setCurrentModelProvider(modelProvider)
 
     }
 
@@ -148,6 +148,21 @@ const ModelPage = memo((props) => {
         })
         
     }, [])
+
+    const modelFormSubmit = (formData: Record<string, any>) => {
+        
+        const modelProvider : ModelProviderEntity = {
+            name: currentModelProvider?.name,
+            type: "self",
+            class_name: currentModelProvider?.name,
+            credential_config: formData
+        }
+        console.log("formdata: {}", modelProvider)
+        
+        ModelFetch.addProvider(modelProvider).then(res=> {
+            console.log("res")
+        })
+    }
 
     
     return (
@@ -189,47 +204,43 @@ const ModelPage = memo((props) => {
                 />
             </div>
             {
-                settings && currentModel &&
+                settings && currentModelProvider &&
                 <Dialog open={settingsOpen} onOpenChange={setSettingsOpen} >
                 
                     <DialogContent className='w-[700px]'>
                         <DialogHeader>
                             <DialogTitle className='flex gap-3'>
                                 <div>{t('common.operation.settings')}</div>
-                                <img src={`/images/models/${currentModel.name}/logo.${currentModel.suffix ? currentModel.suffix : 'svg'}`} alt={currentModel.name} className=' h-5'/>
+                                <img src={`/images/models/${currentModelProvider.name}/logo.${currentModelProvider.suffix ? currentModelProvider.suffix : 'svg'}`} alt={currentModelProvider.name} className=' h-5'/>
                             </DialogTitle>
-                            <DialogDescription>
-                                <DynamicForm formSchema={settings} />
-                                <div className='my-1'>
-                                    <Button variant="outline">
-                                        <RxPlus />
-                                        添加模型
-                                    </Button>
-                                    <div className='models flex flex-col rounded bg-secondary text-xs divide-y my-2 max-h-[300px] overflow-y-auto'>
-                                    {
-                                        modelListLoading ? (
-                                            <div>
-                                                <Skeleton className="h-12 w-12 rounded-full" />
-                                            </div>
-                                        ): (
-                                        modelList.map(item => 
-                                            <div className='flex gap-2 items-center p-2'>
-                                                <span className=' text-sm font-bold'>{item.name}</span>
-                                                <span className='border rounded p-1'>{item.type}</span>
-                                                <span className='border rounded p-1'>{item.context_window}</span>
-                                                item.support_vision && <span className='border rounded p-1'>VISION</span>
-                                            </div>
-                                        )
-                                            
-                                        )
-                                    }
-                                        
-                                        
-                                        
+                            <div>
+                                <DynamicForm formSchema={settings} onSubmit={modelFormSubmit} />
+                                    <div className='my-1'>
+                                        <Button variant="outline">
+                                            <RxPlus />
+                                            {t('common.modelProvider.addModel')}
+                                        </Button>
+                                        <div className='models flex flex-col rounded bg-secondary text-xs divide-y my-2 max-h-[300px] overflow-y-auto'>
+                                        {
+                                            modelListLoading ? (
+                                                <div>
+                                                    <Skeleton className="h-12 w-12 rounded-full" />
+                                                </div>
+                                            ): (
+                                            modelList.map(item => 
+                                                <div className='flex gap-2 items-center p-2'>
+                                                    <span className=' text-sm font-bold'>{item.name}</span>
+                                                    <span className='border rounded p-1'>{item.type}</span>
+                                                    <span className='border rounded p-1'>{item.context_window}</span>
+                                                    item.support_vision && <span className='border rounded p-1'>VISION</span>
+                                                </div>
+                                            )
+                                                
+                                            )
+                                        }    
+                                        </div>
                                     </div>
-                                </div>
-                                
-                            </DialogDescription>
+                            </div>
                         </DialogHeader>
                     </DialogContent>
                 </Dialog>

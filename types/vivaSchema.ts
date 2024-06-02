@@ -37,7 +37,7 @@ interface ModelProviderEntity extends StandardEntity {
     type: string
     class_name: string
     assets?: Assets
-    credential_config: Record<string, any>
+    credential_config?: Record<string, any>
 }
     
 

@@ -38,8 +38,13 @@ const translation = {
         addCondition: '添加条件',
         variable: '变量',
         expression: '表达式'
-
+    },
+    errorMessages: {
+        common: {
+            required: "必填项"
+        }
     }
+    
 }
 
 export default translation

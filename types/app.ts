@@ -499,3 +499,8 @@ export interface BaseSidebarProps extends DialogProps {
   footerSlot?: React.ReactNode  
 }
 
+export type Message = {
+  type: string,
+  content: string
+}
+

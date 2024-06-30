@@ -7,8 +7,12 @@ import { Separator } from "@/components/ui/separator"
 import { memo, useState } from "react"
 import { RxPaperPlane } from "react-icons/rx"
 import { useTranslation } from 'react-i18next'
+import { Message } from "@/types/app"
+interface ChatInputProps {
 
-const ChatInput = memo(() => {
+    onMessageSend: (messages: Message[]) => void;
+}
+const ChatInput = memo((props: ChatInputProps) => {
     const { t } = useTranslation()
     const [message, setMessage] = useState<string>()
     const handleKeyDown = (event:React.KeyboardEvent<HTMLTextAreaElement>) => { 
@@ -19,6 +23,10 @@ const ChatInput = memo(() => {
     };
     const sendMessage = () => {
         console.log("send: ", message)
+        if(message) {
+            props.onMessageSend([{"type": "user", "content": message}])
+        }
+    
     }
     return (
         <div className=' bg-white border rounded-xl shadow justify-start items-start gap-3 flex my-5 flex-col w-full mx-4 py-2 px-4 overflow-hidden'>

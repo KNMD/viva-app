@@ -25,6 +25,9 @@ import ModelSelector from '../model-selector';
 import ChatInput from './chat-input';
 const Chat = memo(() => {
     const { t } = useTranslation()
+    const handleMessage = (messages) => {
+
+    }
     return (
         <div className='chat-wrapper w-full bg-secondary relative h-full flex flex-col justify-between overflow-hidden'>
             <ModelSelector />
@@ -179,7 +182,7 @@ const Chat = memo(() => {
                 </div>
             </div>
             <div className='input w-full justify-center items-center flex'>
-                <ChatInput />
+                <ChatInput onMessageSend={handleMessage} />
             </div>
         </div>
     )

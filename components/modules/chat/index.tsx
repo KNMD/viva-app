@@ -21,78 +21,13 @@ import Maximize from '@/components/icons/maximize';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuPortal, DropdownMenuSeparator, DropdownMenuShortcut, DropdownMenuSub, DropdownMenuSubContent, DropdownMenuSubTrigger, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { RxSlider } from "react-icons/rx";
+import ModelSelector from '../model-selector';
+import ChatInput from './chat-input';
 const Chat = memo(() => {
     const { t } = useTranslation()
     return (
         <div className='chat-wrapper w-full bg-secondary relative h-full flex flex-col justify-between overflow-hidden'>
-            <div className='header-wrapper w-full m-3 flex justify-end pr-10'>
-                <DropdownMenu>
-                    <DropdownMenuTrigger asChild>
-                        <Tabs defaultValue="account">
-                            <TabsList>
-                                <TabsTrigger value="account" className='flex '>
-                                    <div className='flex text-xs text-slate-500 space-x-2 items-center'>
-                                        <img src='/images/ai_providers/openai.svg' className='w-4 h-4' />
-                                        <span>GPT-3.5-turbo</span>
-                                        <span className='border rounded px-1'>chat</span>
-                                        <RxSlider />
-                                    </div>
-                                </TabsTrigger>
-                            </TabsList>
-                        </Tabs>
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent className="w-56">
-                        <DropdownMenuLabel>My Account</DropdownMenuLabel>
-                        <DropdownMenuSeparator />
-                        <DropdownMenuGroup>
-                            <DropdownMenuItem>
-                                Profile
-                                <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
-                            </DropdownMenuItem>
-                            <DropdownMenuItem>
-                                Billing
-                                <DropdownMenuShortcut>⌘B</DropdownMenuShortcut>
-                            </DropdownMenuItem>
-                            <DropdownMenuItem>
-                                Settings
-                                <DropdownMenuShortcut>⌘S</DropdownMenuShortcut>
-                            </DropdownMenuItem>
-                            <DropdownMenuItem>
-                                Keyboard shortcuts
-                                <DropdownMenuShortcut>⌘K</DropdownMenuShortcut>
-                            </DropdownMenuItem>
-                        </DropdownMenuGroup>
-                        <DropdownMenuSeparator />
-                        <DropdownMenuGroup>
-                            <DropdownMenuItem>Team</DropdownMenuItem>
-                            <DropdownMenuSub>
-                                <DropdownMenuSubTrigger>Invite users</DropdownMenuSubTrigger>
-                                <DropdownMenuPortal>
-                                    <DropdownMenuSubContent>
-                                        <DropdownMenuItem>Email</DropdownMenuItem>
-                                        <DropdownMenuItem>Message</DropdownMenuItem>
-                                        <DropdownMenuSeparator />
-                                        <DropdownMenuItem>More...</DropdownMenuItem>
-                                    </DropdownMenuSubContent>
-                                </DropdownMenuPortal>
-                            </DropdownMenuSub>
-                            <DropdownMenuItem>
-                                New Team
-                                <DropdownMenuShortcut>⌘+T</DropdownMenuShortcut>
-                            </DropdownMenuItem>
-                        </DropdownMenuGroup>
-                        <DropdownMenuSeparator />
-                        <DropdownMenuItem>GitHub</DropdownMenuItem>
-                        <DropdownMenuItem>Support</DropdownMenuItem>
-                        <DropdownMenuItem disabled>API</DropdownMenuItem>
-                        <DropdownMenuSeparator />
-                        <DropdownMenuItem>
-                            Log out
-                            <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
-                        </DropdownMenuItem>
-                    </DropdownMenuContent>
-                </DropdownMenu>
-            </div>
+            <ModelSelector />
             <div className='flex flex-col px-3 py-2 overflow-y-auto'>
                 <div className="time-wrapper w-full justify-center items-center gap-4 inline-flex my-5">
                     <div className="grow basis-0 h-[0.5px] border border-gray-100"></div>
@@ -106,7 +41,7 @@ const Chat = memo(() => {
                         <AvatarFallback>Viva</AvatarFallback>
                     </Avatar>
                     <div className="flex-col justify-start items-start gap-2 flex">
-                        <div className="self-stretch h-28 flex-col justify-start items-start gap-2 flex">
+                        <div className="self-stretch flex-col justify-start items-start gap-2 flex">
                             <div className="justify-start items-center gap-3 inline-flex">
                                 <div className="text-sm leading-tight">Viva.AI</div>
                                 <Separator orientation='vertical' />
@@ -244,30 +179,7 @@ const Chat = memo(() => {
                 </div>
             </div>
             <div className='input w-full justify-center items-center flex'>
-                <div className=' bg-white border rounded-xl shadow justify-start items-start gap-3 flex my-5 flex-col w-full mx-4 py-2 px-4 overflow-hidden'>
-                    <textarea className='border-0 w-full min-h-[50px] max-h-[150px] focus-visible:outline-none text-sm text-slate-500 resize-y overflow-y-auto' />
-                    <Separator />
-                    <div className='features flex justify-between items-center w-full'>
-                        <div className='flex space-x-2'>
-                            <div className='p-1 rounded hover:bg-secondary cursor-pointer'>
-                                <Paperclip />
-                            </div>
-                            <div className='p-1 rounded hover:bg-secondary cursor-pointer'>
-                                <Micphone />
-                            </div>
-                            <div className='p-1 rounded hover:bg-secondary cursor-pointer'>
-                                <Picture />
-                            </div>
-                            <div className='p-1 rounded hover:bg-secondary cursor-pointer'>
-                                <Maximize />
-                            </div>
-                        </div>
-                        <Button className='bg-gradient-to-r from-violet-500 to-fuchsia-500 space-x-2'>
-                            <RxPaperPlane />
-                            <span>{t("appApi.chatMode.createChatApi")}</span>
-                        </Button>
-                    </div>
-                </div>
+                <ChatInput />
             </div>
         </div>
     )

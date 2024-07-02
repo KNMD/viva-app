@@ -8,6 +8,10 @@ const nextConfig = {
             source: '/viva-service/:path*',
             destination: process.env.APP_BACKEND_BASE + '/viva-service/:path*',
           },
+          {
+            source: '/engine/:path*',
+            destination: process.env.APP_ENGINE_BASE + '/engine/:path*',
+          },
         ];
     },
 };

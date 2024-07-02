@@ -504,3 +504,8 @@ export type Message = {
   content: string
 }
 
+
+export interface EventCallbacks {
+  onMessage: (message: any) => void;
+  onFinally: (sentence: string) => void;
+}

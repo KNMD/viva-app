@@ -182,7 +182,7 @@ const Chat = memo(() => {
                 </div>
             </div>
             <div className='input w-full justify-center items-center flex'>
-                <ChatInput onMessageSend={handleMessage} />
+            <ChatInput onMessageSend={handleMessage} />
             </div>
         </div>
     )

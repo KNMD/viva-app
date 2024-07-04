@@ -1,7 +1,9 @@
 // lib/BaseFetch.ts
 "use client"
 
-import { EventCallbacks } from "@/types/app";
+import { EventCallbacks, RestResponseError } from "@/types/app";
+
+
 
 export interface RequestOptions extends RequestInit {
   headers?: Record<string, string>;
@@ -40,22 +42,33 @@ export default abstract class BaseFetch {
 
 
   private async request<T>(endpoint: string, options: RequestOptions = {}): Promise<ResponseEntity<T>> {
-    
+    let response;
     try {
-      const response = await fetch(this.makeURL(endpoint), this.rewriteConfig(options));
-      if (!response.ok) {
+      response = await fetch(this.makeURL(endpoint), this.rewriteConfig(options));
+      if (response && !response.ok) {
         const errorData = await response.json();
-        throw new Error(errorData.message || 'Request failed');
+        throw new RestResponseError(errorData.message || 'Request failed', errorData);
       }
-      return await response.json();
     } catch (error) {
       console.error('Fetch error:', error);
       throw error;
     }
+    
+    return await response.json();
+    
   }
 
-  protected get<T>(endpoint: string, options: RequestOptions = {}): Promise<ResponseEntity<T>> {
-    return this.request<T>(endpoint, { ...options, method: 'GET' });
+  private urlQuery(endpoint: string, params:Record<string, any>) {
+    if(params) {
+      let queryString = ""
+      Object.keys(params).forEach(key => queryString += `&${key}=${encodeURIComponent(params[key])}`)
+      return endpoint + "?" + queryString.substring(1)
+    }
+    return endpoint
+  }
+
+  protected get<T>(endpoint: string, params: Record<string, any> = {}, options: RequestOptions = {}): Promise<ResponseEntity<T>> {
+    return this.request<T>(this.urlQuery(endpoint, params), { ...options, method: 'GET' });
   }
 
   protected post<T>(endpoint: string, body: any, options: RequestOptions = {}): Promise<ResponseEntity<T>> {
@@ -98,12 +111,10 @@ export default abstract class BaseFetch {
             break;
           }else if(value.startsWith("data: ")) {
             const chunks = value.split("\n")
-            console.log("chunks: ", chunks)
             if(chunks.length) {
               chunks.forEach(chunk => {
                 if(chunk.startsWith("data: ")) {
                   const jsonChunk = chunk.substring(6)
-                  console.log("jsonChunk: ", jsonChunk)
                   const chunkEntity = JSON.parse(jsonChunk.trim())
                   if(chunkEntity.choices && chunkEntity.choices[0] && chunkEntity.choices[0].delta && chunkEntity.choices[0].delta) {
                     callbacks.onMessage(chunkEntity.choices[0].delta)
@@ -132,4 +143,6 @@ export default abstract class BaseFetch {
     return this.stream(endpoint, { ...options, method: 'POST', body: JSON.stringify(body) }, callbacks);
   }
 }
+
+
 

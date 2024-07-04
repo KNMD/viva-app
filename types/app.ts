@@ -500,12 +500,31 @@ export interface BaseSidebarProps extends DialogProps {
 }
 
 export type Message = {
-  type: string,
+  role: string,
   content: string
+}
+
+export type ChatMessage = Message & {
+  time: number,
+  enableRefresh?: boolean
+  enableCopy?: boolean
+  tokens?: number
+  audioURL?: string
+  options?: string[]
 }
 
 
 export interface EventCallbacks {
   onMessage: (message: any) => void;
   onFinally: (sentence: string) => void;
+}
+
+export class RestResponseError extends Error {
+  public data: Record<string, any>;
+
+  constructor(message: string, data: Record<string, any>) {
+    super(message);
+    this.name = "RestResponseError";
+    this.data = data;
+  }
 }

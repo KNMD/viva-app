@@ -195,8 +195,8 @@ const AppDetailPage = memo((props) => {
                             </div>  
                             <CollapsibleContent className=' text-xs py-3 h-auto flex flex-col space-y-2'>
                                 <Textarea placeholder="Type your message here." />
-                                {openerOptions.map((option) => (
-                                    <div className=' space-x-1 flex w-full justify-between items-center'>
+                                {openerOptions.map((option, idx) => (
+                                    <div key={idx} className=' space-x-1 flex w-full justify-between items-center'>
                                         <div className='w-full'>
                                             <Input value={option} />
                                         </div>

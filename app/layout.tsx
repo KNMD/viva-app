@@ -5,7 +5,7 @@ import { appWithTranslation } from 'next-i18next';
 import BrowerInitor from "./browser-initor";
 import I18nServer from "./i18n-server";
 import { getLocaleOnServer } from "@/i18n/server";
-
+import { Toaster } from "@/components/ui/toaster"
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -40,6 +40,7 @@ export default function RootLayout({
         <BrowerInitor>
             <I18nServer locale={locale}>{children}</I18nServer>
         </BrowerInitor>
+        <Toaster />
       </body>
     </html>
   );

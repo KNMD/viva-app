@@ -40,11 +40,20 @@ const translation = {
         expression: '表达式'
     },
     errorMessages: {
+        commonTitle: "错误",
+        unknown: "操作失败，未知错误",
+        resp: {
+            model_provider_auth_fail: "模型供应商认证失败"
+        },
         common: {
             required: "必填项"
         }
+    },
+    model: {
+        select: {
+            placeholder: "选择一个模型"
+        }
     }
-    
 }
 
 export default translation

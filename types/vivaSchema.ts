@@ -4,6 +4,7 @@ interface ResponseEntity<T> {
     data: T
 }
 
+
 interface Page<T> {
     items: T[]
     page: number
@@ -24,15 +25,15 @@ interface Assets {
 }
 
 interface StandardEntity{
-    created_at: Date
-    created_by: string
+    created_at?: Date
+    created_by?: string
     last_update_at?: Date
     last_update_by?: string
-    tenant: string
+    tenant?: string
 }
 
 interface ModelProviderEntity extends StandardEntity {
-    id: string
+    id?: string
     name: string
     type: string
     class_name: string
@@ -51,4 +52,8 @@ interface ModelEntity extends StandardEntity {
     support_vision: boolean
     args?: Record<string, any> 
 }
-    
+
+interface ModelGroup {
+    providerName: string
+    modelList: ModelEntity[]
+}

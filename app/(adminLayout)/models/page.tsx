@@ -9,7 +9,7 @@ import React, { memo, useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation';
 import { useTranslation } from 'react-i18next'
 import { Separator } from '@radix-ui/react-separator'
-import { cn } from '@/lib/utils'
+import { cn, errorToastProps } from '@/lib/utils'
 import Link from 'next/link'
 import Vector from '@/components/icons/vector'
 import Image from "next/image";
@@ -30,7 +30,7 @@ import ModelFetch from '@/lib/requests/model-fetch'
 import { Skeleton } from '@/components/ui/skeleton'
 
 const supportedModelProvider = [{
-    name: 'OpenAI',
+    name: 'openai',
     seted: false,
     modelProduct: 'ChatGPT',
     modelTypes: ["CHAT", "GENERATION", "TEXT_EMBEDDING", "RERANK", "SPEECH2TEXT", "MODERATION", "TTS", "TEXT2IMG"],
@@ -39,7 +39,7 @@ const supportedModelProvider = [{
             type: 'object',
             properties: {
                 api_key: { type: 'string' },
-                base_url: {type: 'string'},
+                api_base: {type: 'string'},
                 organization_id: { type: 'string'}
             },
             required: ['api_key']
@@ -51,7 +51,7 @@ const supportedModelProvider = [{
         },
         "ui": {
             "api_key": {"component":"input", "displayName": "API Key"},
-            "base_url": {"component":"input", "displayName": "API Base"},
+            "api_base": {"component":"input", "displayName": "API Base"},
             "organization_id": {"component":"input", "displayName": "Organization ID"},
         },
     },
@@ -150,17 +150,22 @@ const ModelPage = memo((props) => {
     }, [])
 
     const modelFormSubmit = (formData: Record<string, any>) => {
-        
+        formData.type = "openai"
         const modelProvider : ModelProviderEntity = {
             name: currentModelProvider?.name,
             type: "self",
             class_name: currentModelProvider?.name,
-            credential_config: formData
+            credential_config: {
+                type: currentModelProvider?.name,
+                ...formData
+            }
         }
-        console.log("formdata: {}", modelProvider)
         
         ModelFetch.addProvider(modelProvider).then(res=> {
             console.log("res")
+        }).catch(error=> {
+            console.log("error res: ", error.data)
+            toast(errorToastProps(error.data, t))
         })
     }
 

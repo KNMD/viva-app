@@ -30,6 +30,9 @@ class ModelFetch extends BaseFetch {
     return this.post<ModelProviderEntity>(`/providers`, data)
   }
 
+  async modelsByGroups(query: Record<string, any>) {
+    return this.get<ModelGroup[]>(`/groups`, query);
+  }
 
 }
 

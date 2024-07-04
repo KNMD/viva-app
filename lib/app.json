@@ -1,4 +1,8 @@
 {
+    "app": {
+        "name": "Viva.AI",
+        "icon": "/images/viva-avatar.png"
+    },
     "leftNavs": [{
         "type": "fixed",
         "name": "home",
